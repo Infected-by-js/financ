@@ -1,7 +1,7 @@
-import { FC, ReactNode } from 'react';
-import { Box, Center, HStack, Icon, Text, VStack } from 'native-base';
-import { Feather } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { FC, ReactNode } from 'react';
+import { Box, HStack, Icon, IconButton, Text, VStack } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 import { getUser } from '@/fixtures/dummy';
 
 interface Props {
@@ -10,21 +10,37 @@ interface Props {
 
 const Main: FC<Props> = () => {
   const user = getUser();
+  const navigation = useNavigation();
+
+  const routeToProfile = () => {};
 
   return (
-    <SafeAreaView>
-      <HStack justifyContent={'space-between'} px={4}>
+    <VStack safeAreaTop bg="blueGray.100" w="full" h="full" pt={2}>
+      <HStack alignItems="center" justifyContent="space-between" px={4} w="full">
         <Box>
-          <Text fontSize={24}>Привет, </Text>
-          <Text fontSize={26} fontWeight="bold">
+          <Text fontSize="md">Привет, </Text>
+          <Text fontSize="md" fontWeight="bold">
             {user.name}
           </Text>
         </Box>
+
         <Box>
-          <Feather name="plus" size={40} />
+          <IconButton
+            icon={<Icon as={AntDesign} name="plus" size="md" />}
+            rounded={'full'}
+            _light={{
+              bg: 'primary.300',
+              _icon: {
+                color: 'white',
+              },
+            }}
+            _pressed={{
+              bg: 'primary.200',
+            }}
+          />
         </Box>
       </HStack>
-    </SafeAreaView>
+    </VStack>
   );
 };
 

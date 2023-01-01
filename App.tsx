@@ -1,10 +1,10 @@
-import AppContainer from '@/components/AppContainer';
-import Navigator from '@/navs/Navigator';
+import Navigator from '@/navigation/Navigator';
+import ThemeProvider from '@/providers/ThemeProvider';
 
 export default function App() {
   return (
-    <AppContainer>
-      <Navigator />
-    </AppContainer>
+      <ThemeProvider>
+        <Navigator />
+      </ThemeProvider>
   );
 }
