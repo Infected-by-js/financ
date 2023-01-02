@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
-import { Text, View } from 'react-native';
+import { Heading, VStack, useColorModeValue } from 'native-base';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface Props {
   children?: ReactNode;
@@ -7,9 +8,16 @@ interface Props {
 
 const Settings: FC<Props> = () => {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <VStack
+      safeAreaTop
+      w="full"
+      h="full"
+      pt={4}
+      bg={useColorModeValue('coolGray.200', 'coolGray.800')}
+    >
+      <Heading>Settings</Heading>
+      <ThemeToggle />
+    </VStack>
   );
 };
 

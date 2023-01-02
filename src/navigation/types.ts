@@ -1,12 +1,9 @@
 import { ComponentType } from 'react';
+import { Screens } from './screens';
 
-export type RootParamList = {
-  Main: undefined;
-  History: undefined;
-  Settings: undefined;
-};
-
+export type ScreenName = keyof typeof Screens;
 export interface Screen {
-  name: keyof RootParamList;
+  name: ScreenName;
   component: ComponentType;
+  options?: object;
 }

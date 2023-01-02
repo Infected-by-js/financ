@@ -32,11 +32,9 @@ export interface Operation {
   groupId: string;
   userId: string;
   pouchId: string;
-  name: string;
-  amount: number;
-  currency: Currency;
-  available_balance: number;
-  date: Date | string;
+  title: string;
   description: string | null;
   type: OperationType;
+  amount: number;
+  date: Date | string;
 }

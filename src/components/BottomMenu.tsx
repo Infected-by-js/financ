@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { HStack } from 'native-base';
+import { Platform } from 'react-native';
+import { HStack, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import { RootParamList } from '@/navigation/types';
+import { Screens } from '@/navigation/screens';
+import { ScreenName } from '@/navigation/types';
 import BottomMenuItem from './BottomMenuItem';
 
-type ScreenName = keyof RootParamList;
 type IconName = keyof typeof Ionicons.glyphMap;
 type MenuItem = { icon: IconName; screen: ScreenName };
 
@@ -14,21 +15,26 @@ interface Props {
 }
 
 const menuItems: MenuItem[] = [
-  { icon: 'file-tray-stacked', screen: 'Main' },
-  { icon: 'bar-chart', screen: 'History' },
-  { icon: 'settings', screen: 'Settings' },
+  { icon: 'file-tray-stacked', screen: Screens.Main },
+  { icon: 'bar-chart', screen: Screens.History },
+  { icon: 'settings', screen: Screens.Settings },
 ];
 
 const BottomMenu: FC<Props> = ({ currentRoute, changeRoute }) => {
+  if (Platform.OS === 'android' && currentRoute === Screens.Operation) {
+    return null;
+  }
+
   return (
     <HStack
-      bg="blueGray.100"
       safeAreaBottom
       shadow={2}
       px={4}
       pt={4}
+      pb={2}
       justifyContent="space-around"
       alignItems="center"
+      bg={useColorModeValue('coolGray.100', 'coolGray.800')}
     >
       {menuItems.map(({ icon, screen }) => (
         <BottomMenuItem

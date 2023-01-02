@@ -31,7 +31,12 @@ const Navigator = () => {
         initialRouteName="Main"
       >
         {screens.map((screen) => (
-          <Stack.Screen name={screen.name} component={screen.component} key={screen.name} />
+          <Stack.Screen
+            name={screen.name}
+            component={screen.component}
+            options={screen.options}
+            key={screen.name}
+          />
         ))}
       </Stack.Navigator>
       {currentRoute && <BottomMenu currentRoute={currentRoute} changeRoute={navRef.navigate} />}

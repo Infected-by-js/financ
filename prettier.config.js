@@ -13,9 +13,20 @@ module.exports = {
     '^native-base$',
     '^@react(.*)$',
     '<THIRD_PARTY_MODULES>',
+
     '^@/hooks/(.*)$',
-    '^@/screens/(.*)$',
     '^@/components/(.*)$',
+
+    // start feature sliced
+    '^@/app/(.*)$',
+    '^@/processes/(.*)$',
+    '^@/screens/(.*)$',
+    '^@/widgets/(.*)$',
+    '^@/features/(.*)$',
+    '^@/entities/(.*)$',
+    '^@/shared/(.*)$',
+    // end feature sliced
+
     '^@/(.*)/(.*)$',
     '^../(.*)',
     '^./(.*)',

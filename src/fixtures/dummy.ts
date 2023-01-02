@@ -6,7 +6,7 @@ const user: User = {
   email: 'test@test.test',
   name: 'Кристина',
   password: 'test@test.test',
-  shortPassword: 12345,
+  shortPassword: 1234,
 };
 
 const groups: Group[] = [
@@ -64,12 +64,10 @@ const operations: Operation[] = [
     pouchId: '1',
     groupId: '3',
     userId: user._id,
-    name: 'Зарплата',
+    title: 'Зарплата',
     type: 'deposit',
     description: null,
     amount: 10000,
-    available_balance: 0,
-    currency: 'RUB',
     date: '2022-12-30T13:53:44.639Z',
   },
   {
@@ -78,12 +76,21 @@ const operations: Operation[] = [
     groupId: '1',
     userId: user._id,
     amount: 1000,
-    available_balance: 10000,
-    currency: 'RUB',
     date: '2022-12-31T13:53:44.639Z',
-    name: 'Подарки',
+    title: 'Подарки',
     type: 'withdraw',
     description: 'Оставшиеся подарки к новому году',
+  },
+  {
+    _id: '3',
+    pouchId: '1',
+    groupId: '2',
+    userId: user._id,
+    amount: 500,
+    date: '2022-12-31T13:13:44.639Z',
+    title: 'Продукты',
+    type: 'withdraw',
+    description: 'Энергетики',
   },
 ];
 

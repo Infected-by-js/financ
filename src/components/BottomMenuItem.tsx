@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Icon, Pressable } from 'native-base';
+import { Icon, Pressable, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
@@ -13,7 +13,7 @@ const BottomMenuItem: FC<Props> = ({ onPress, icon, isActive }) => {
     <Pressable onPress={onPress} p={2}>
       <Icon
         as={Ionicons}
-        color="primary.600"
+        color={useColorModeValue('coolGray.800', 'coolGray.100')}
         size="lg"
         name={isActive ? icon : `${icon}-outline`}
       />
