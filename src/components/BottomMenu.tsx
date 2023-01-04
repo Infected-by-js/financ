@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Platform } from 'react-native';
 import { HStack, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import { Screens } from '@/navigation/screens';
 import { ScreenName } from '@/navigation/types';
 import BottomMenuItem from './BottomMenuItem';
 
@@ -15,13 +14,13 @@ interface Props {
 }
 
 const menuItems: MenuItem[] = [
-  { icon: 'file-tray-stacked', screen: Screens.Main },
-  { icon: 'bar-chart', screen: Screens.History },
-  { icon: 'settings', screen: Screens.Settings },
+  { icon: 'file-tray-stacked', screen: 'Main' },
+  { icon: 'bar-chart', screen: 'History' },
+  { icon: 'settings', screen: 'Settings' },
 ];
 
 const BottomMenu: FC<Props> = ({ currentRoute, changeRoute }) => {
-  if (Platform.OS === 'android' && currentRoute === Screens.Operation) {
+  if (Platform.OS === 'android' && currentRoute === 'Operation') {
     return null;
   }
 

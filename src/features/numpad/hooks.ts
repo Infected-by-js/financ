@@ -24,7 +24,10 @@ export const useNumpad = () => {
 
       default: {
         if (isNoPoint || isLast || isPrevLast) {
-          setAmount((prev) => (!Number(prev) ? value : prev + value));
+          setAmount((prev) => {
+            const isZeroFirst = !Number(prev) && prev.length === 1;
+            return isZeroFirst ? value : prev + value;
+          });
         }
       }
     }

@@ -1,7 +1,6 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
 import { Box, HStack, ScrollView, Text, VStack, View, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import BottomSheet from '@/components/BottomSheet';
 import OperationListItem from '@/components/OperationListItem';
 import { getPouchOperations, getUser, getUserGroups } from '@/fixtures/dummy';
 import { Group, Operation } from '@/fixtures/types';
@@ -30,7 +29,6 @@ const getGroupByOperationId = (groups: Group[], operationId: string): Group | nu
 };
 
 const Main: FC<Props> = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const user = getUser();
   const operations = getPouchOperations();
   const groups = getUserGroups();
@@ -42,45 +40,41 @@ const Main: FC<Props> = () => {
   };
 
   return (
-    <>
-      <VStack
-        safeAreaTop
-        w="full"
-        h="full"
-        pt={4}
-        px={4}
-        bg={useColorModeValue('coolGray.100', 'coolGray.800')}
-      >
-        <Header user={user} onPress={() => navigation.navigate('Operation')} />
-        <BalanceBanner operations={operations} />
+    <VStack
+      safeAreaTop
+      w="full"
+      h="full"
+      pt={4}
+      px={4}
+      bg={useColorModeValue('coolGray.100', 'coolGray.800')}
+    >
+      <Header user={user} onPress={() => navigation.navigate('Operation')} />
+      <BalanceBanner operations={operations} />
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View mb={8}>
-            <Box ml="12" mb={2}>
-              <HStack
-                pb={2}
-                justifyContent="space-between"
-                borderBottomColor="coolGray.300"
-                borderBottomWidth={1}
-              >
-                <Text color="coolGray.400"> Сегодня </Text>
-                <Text color="coolGray.400">{toCurrency(sumOfOperations(operations))} ₽</Text>
-              </HStack>
-            </Box>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View mb={8}>
+          <Box ml="12" mb={2}>
+            <HStack
+              pb={2}
+              justifyContent="space-between"
+              borderBottomColor="coolGray.300"
+              borderBottomWidth={1}
+            >
+              <Text color="coolGray.400"> Сегодня </Text>
+              <Text color="coolGray.400">{toCurrency(sumOfOperations(operations))} ₽</Text>
+            </HStack>
+          </Box>
 
-            {operations.map((operation) => (
-              <OperationListItem
-                groupIcon={getGroupIcon(operation.groupId)}
-                operation={operation}
-                key={operation._id}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </VStack>
-
-      <BottomSheet />
-    </>
+          {operations.map((operation) => (
+            <OperationListItem
+              groupIcon={getGroupIcon(operation.groupId)}
+              operation={operation}
+              key={operation._id}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </VStack>
   );
 };
 
