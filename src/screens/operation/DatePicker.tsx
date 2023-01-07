@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Text } from 'native-base';
-import { toTime } from '@/utils';
+import { toTime } from '@/shared/utils';
 
 interface Props {
   children?: ReactNode;

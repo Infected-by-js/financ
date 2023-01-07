@@ -1,5 +1,7 @@
 import numeral from 'numeral';
 
+// TODO: Change to accounting lib
+
 interface ToCurrecyOptions {
   isShowSign?: boolean;
   pattern?: string;

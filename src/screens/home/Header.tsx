@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Box, HStack, Icon, IconButton, Text, useColorModeValue } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
-import { User } from '@/fixtures/types';
+import { User } from '@/shared/types/models';
 
 interface Props {
-  user: User;
+  user: User | null;
   onPress: () => void;
 }
 
@@ -14,7 +14,7 @@ const Header: FC<Props> = ({ user, onPress }) => {
       <Box>
         <Text fontSize="md">Привет, </Text>
         <Text fontSize="md" fontWeight="bold">
-          {user.name}
+          {user?.name}
         </Text>
       </Box>
       <IconButton

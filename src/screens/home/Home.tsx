@@ -1,12 +1,14 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { Box, HStack, ScrollView, Text, VStack, View, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import OperationListItem from '@/components/OperationListItem';
-import { getPouchOperations, getUser, getUserGroups } from '@/fixtures/dummy';
-import { Group, Operation } from '@/fixtures/types';
+import { getItem } from '@/shared/libs/persistenceStorage';
+import { Group, Operation } from '@/shared/types/models';
+import { toCurrency } from '@/shared/utils';
+import { getPouchOperations, getUserGroups } from '@/fixtures/dummy';
+import { useAuth } from '../../hooks/useAuth';
 import BalanceBanner from './BalanceBanner';
 import Header from './Header';
-import { toCurrency } from '@/utils';
 
 interface Props {
   children?: ReactNode;
@@ -28,8 +30,8 @@ const getGroupByOperationId = (groups: Group[], operationId: string): Group | nu
   return groups.find((group) => operationId === group._id) || null;
 };
 
-const Main: FC<Props> = () => {
-  const user = getUser();
+const Home: FC<Props> = () => {
+  const { user } = useAuth();
   const operations = getPouchOperations();
   const groups = getUserGroups();
   const navigation = useNavigation();
@@ -38,6 +40,10 @@ const Main: FC<Props> = () => {
     const group = getGroupByOperationId(groups, id);
     return group ? group.icon : ' ';
   };
+
+  useEffect(() => {
+    getItem('user').then((data) => console.log(data));
+  }, []);
 
   return (
     <VStack
@@ -78,4 +84,4 @@ const Main: FC<Props> = () => {
   );
 };
 
-export default Main;
+export default Home;

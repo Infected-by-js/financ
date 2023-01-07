@@ -1,13 +1,15 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Center, HStack, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
+import { OperationType } from '@/shared/types/models';
 
 interface Props {
-  children?: ReactNode;
+  activeOperationType: OperationType;
+  toogleOperationType: () => void;
 }
 
-const Header: FC<Props> = () => {
+const Header: FC<Props> = ({ toogleOperationType, activeOperationType }) => {
   const navigation = useNavigation();
 
   return (
@@ -19,9 +21,11 @@ const Header: FC<Props> = () => {
       </Center>
 
       <Center w="1/3">
-        <Text fontSize="md" fontWeight="bold">
-          Пополнение
-        </Text>
+        <TouchableOpacity onPress={toogleOperationType}>
+          <Text fontSize="md" fontWeight="bold">
+            {activeOperationType === 'deposit' ? 'Пополнение' : 'Снятие'}
+          </Text>
+        </TouchableOpacity>
       </Center>
 
       <Center w="1/3" />

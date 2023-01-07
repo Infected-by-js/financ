@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Box, Center, HStack, Text, VStack, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import { Operation } from '@/fixtures/types';
-import { toCurrency, toTime } from '@/utils';
+import { Operation } from '@/shared/types/models';
+import { toCurrency, toTime } from '@/shared/utils';
 
 interface Props {
   operation: Operation;

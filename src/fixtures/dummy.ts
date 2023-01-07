@@ -1,4 +1,4 @@
-import { Group, Operation, Pouch, User } from './types';
+import { Group, Operation, Pouch, User } from '../shared/types/models';
 
 const user: User = {
   _id: 'f7ace532-582a-4edf-88ff-621430d9de33',
@@ -64,7 +64,6 @@ const operations: Operation[] = [
     pouchId: '1',
     groupId: '3',
     userId: user._id,
-    title: 'Зарплата',
     type: 'deposit',
     description: null,
     amount: 10000,
@@ -77,7 +76,6 @@ const operations: Operation[] = [
     userId: user._id,
     amount: 1000,
     date: '2022-12-31T13:53:44.639Z',
-    title: 'Подарки',
     type: 'withdraw',
     description: 'Оставшиеся подарки к новому году',
   },
@@ -88,7 +86,6 @@ const operations: Operation[] = [
     userId: user._id,
     amount: 500,
     date: '2022-12-31T13:13:44.639Z',
-    title: 'Продукты',
     type: 'withdraw',
     description: 'Энергетики',
   },

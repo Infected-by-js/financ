@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box, Center, HStack, ScrollView, Text } from 'native-base';
-import { Operation } from '@/fixtures/types';
-import { toCurrency } from '@/utils';
+import { Operation } from '@/shared/types/models';
+import { toCurrency } from '@/shared/utils';
 
 interface Props {
   operations: Operation[];

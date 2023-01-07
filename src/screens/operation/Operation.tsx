@@ -1,25 +1,54 @@
-import { FC, ReactNode } from 'react';
+import { FC, useState } from 'react';
 import { HStack, Icon, Pressable, Text, VStack, useColorModeValue } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Numpad, useNumpad } from '@/features/numpad';
+import { Operation as IOperation, OperationType } from '@/shared/types/models';
+import { logger } from '@/shared/utils';
+import { useAuth } from '../../hooks/useAuth';
 import AmountDisplay from './AmountDisplay';
 import ButtonWithIcon from './ButtonWithIcon';
 import DatePicker from './DatePicker';
 import Header from './Header';
 import NoteInput from './NoteInput';
 
-interface Props {
-  children?: ReactNode;
-}
-
-const Operation: FC<Props> = () => {
+const Operation: FC = () => {
+  const navigation = useNavigation();
   const { value, onSelect } = useNumpad();
+  const [operationType, setOperationType] = useState<OperationType>('withdraw');
+
+  const groups = []; // get from api
+  const pouches = []; // same here
+  const { user } = useAuth();
+  const selectedGroup = '1';
+  const selectedPouch = '1';
+
   const isEmptyValue = !Number(value);
+
+  const toggleOperationType = () => {
+    setOperationType((prev) => (prev === 'withdraw' ? 'deposit' : 'withdraw'));
+  };
+
+  const saveOperation = () => {
+    logger({
+      _id: Date.now().toString(16),
+      amount: Number(value),
+      date: new Date().toISOString(),
+      description: null,
+      groupId: selectedGroup,
+      pouchId: selectedPouch,
+      type: operationType,
+      userId: user?._id,
+    } as IOperation);
+
+    // after success
+    navigation.goBack();
+  };
 
   return (
     <>
       <VStack w="full" h="full" p={4} bg={useColorModeValue('coolGray.100', 'coolGray.800')}>
-        <Header />
+        <Header toogleOperationType={toggleOperationType} activeOperationType={operationType} />
         <AmountDisplay value={value} />
 
         <HStack py={2} borderBottomColor="coolGray.300" borderBottomWidth={1}>
@@ -46,8 +75,10 @@ const Operation: FC<Props> = () => {
           </HStack>
 
           <Pressable
+            onPress={saveOperation}
             variant="solid"
             bg={isEmptyValue ? useColorModeValue('coolGray.200', 'coolGray.700') : 'coolGray.500'}
+            isDisabled={isEmptyValue}
             rounded="xl"
             px={7}
             py={2}

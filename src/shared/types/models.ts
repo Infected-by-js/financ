@@ -6,7 +6,7 @@ export interface User {
   name: string;
   email: string;
   password: string;
-  shortPassword: number | null;
+  passwordShort: string | null;
   avatar: string | null;
 }
 
@@ -32,7 +32,6 @@ export interface Operation {
   groupId: string;
   userId: string;
   pouchId: string;
-  title: string;
   description: string | null;
   type: OperationType;
   amount: number;

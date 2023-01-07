@@ -14,7 +14,7 @@ interface Props {
 }
 
 const menuItems: MenuItem[] = [
-  { icon: 'file-tray-stacked', screen: 'Main' },
+  { icon: 'file-tray-stacked', screen: 'Home' },
   { icon: 'bar-chart', screen: 'History' },
   { icon: 'settings', screen: 'Settings' },
 ];
