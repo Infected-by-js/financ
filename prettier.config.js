@@ -14,22 +14,25 @@ module.exports = {
     '^@react(.*)$',
     '<THIRD_PARTY_MODULES>',
 
-    '^@/hooks/(.*)$',
-    '^@/components/(.*)$',
+    '^@/core(.*)$',
+    '^@/api(.*)$',
+    '^@/services(.*)$',
+    '^@/hooks(.*)$',
+    '^@/shared(.*)$',
+    '^@/types(.*)$',
 
-    // start feature sliced
-    '^@/app/(.*)$',
-    '^@/processes/(.*)$',
-    '^@/screens/(.*)$',
-    '^@/widgets/(.*)$',
-    '^@/features/(.*)$',
-    '^@/entities/(.*)$',
-    '^@/shared/(.*)$',
-    // end feature sliced
+    '^@/components/screens(.*)$',
+    '^@/components/templates(.*)$',
+    '^@/components/organisms(.*)$',
+    '^@/components/molecules(.*)$',
+    '^@/components/atoms(.*)$',
 
-    '^@/(.*)/(.*)$',
-    '^../(.*)',
-    '^./(.*)',
+    '^@/(.*)$',
+    '^../(.*)$',
+    '^./(.*)$',
+
+    // '^../(.*)$',
+    // '^./(.*)$',
   ],
   importOrderSortSpecifiers: true,
 };

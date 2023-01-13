@@ -1,4 +1,4 @@
-import { Group, Operation, Pouch, User } from '../shared/types/models';
+import { Group, Operation, Pouch, User } from '../types/models';
 
 const user: User = {
   _id: 'f7ace532-582a-4edf-88ff-621430d9de33',
@@ -6,7 +6,7 @@ const user: User = {
   email: 'test@test.test',
   name: 'Кристина',
   password: 'test@test.test',
-  shortPassword: 1234,
+  passwordShort: '1234',
 };
 
 const groups: Group[] = [

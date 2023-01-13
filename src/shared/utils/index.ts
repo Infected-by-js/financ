@@ -1,3 +1,3 @@
-export { toTime } from './dateHandlers';
+export { toTime } from './dates';
 export { default as logger } from './logger';
-export { toCurrency } from './numberHandlers';
+export { toCurrency } from './numbers';
