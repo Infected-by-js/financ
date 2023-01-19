@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from 'react';
 import { Button, HStack, Icon, Switch, Text, View, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import ShortPasswordInput from '@/components/molecules/ShortPasswordInput';
+import { InputOTP } from '@/shared/components/molecules';
 import { User } from '@/types/models';
 
 interface Props {
@@ -41,7 +41,7 @@ const FormStep3: FC<Props> = ({ backToPrevStep, submitStep }) => {
       <Switch isChecked={isNeedPassword} onToggle={togglePassword} mb={6} />
 
       {isNeedPassword && (
-        <ShortPasswordInput
+        <InputOTP
           onChange={setPasswordShort}
           password={passwordShort}
           passwordLength={PASSWORD_LENGTH}

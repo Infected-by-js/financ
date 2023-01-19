@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Screens from '@/components/screens';
-import { BottomMenu } from '@/components/organisms';
 import { useUserContext } from '@/hooks';
+import { BottomMenu } from '@/shared/components/organisms';
 import { useBottomMenuNavigation } from './hooks';
+import * as Screens from '@/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,29 +12,10 @@ const Navigator = () => {
   const { user, isInitLoading } = useUserContext();
   const { navRef, currentRoute } = useBottomMenuNavigation();
 
-  const isLoggedIn = user;
-
-  /*
-  * Пока определяется юзер
-
-  * если пользователь есть в асинк сторе - запрашиваем его данные с бека
-  *  - если есть 4-х знач код тогда показываем экран логина с кодом
-  *  - если нет - логиним автоматически
-  * 
-  * показываем экран Entrance на котором грузим все данные для отображения
-  * 
-  * если пользователя нет в асинк сторе тогда показываем экран логина
-  * после логина перекидываем на экран Entrance
-  * 
-  * 
-  * 
-  * валидировать на существующий код тут
-  */
-
   const getInitialRouteName = useCallback(() => {
-    if (!isLoggedIn) return 'Register';
+    if (!user) return 'Login';
 
-    return !user?.passwordShort ? 'LoginWithCode' : 'Entrance';
+    return user?.passwordShort ? 'EntranceWithCode' : 'Entrance';
   }, [user]);
 
   return (
@@ -48,8 +29,9 @@ const Navigator = () => {
             screenOptions={{ headerShown: false }}
             initialRouteName={getInitialRouteName()}
           >
-            {isLoggedIn ? (
+            {user ? (
               <>
+                <Stack.Screen name="EntranceWithCode" component={Screens.EntranceWithCodeScreen} />
                 <Stack.Screen name="Entrance" component={Screens.EntranceScreen} />
                 <Stack.Screen name="Home" component={Screens.HomeScreen} />
                 <Stack.Screen name="History" component={Screens.HistoryScreen} />
@@ -58,14 +40,13 @@ const Navigator = () => {
               </>
             ) : (
               <>
-                <Stack.Screen name="SignUp" component={Screens.SignUpScreen} />
                 <Stack.Screen name="Login" component={Screens.LoginScreen} />
-                <Stack.Screen name="LoginWithCode" component={Screens.LoginWithCodeScreen} />
+                <Stack.Screen name="SignUp" component={Screens.SignUpScreen} />
               </>
             )}
           </Stack.Navigator>
 
-          {isLoggedIn && currentRoute && (
+          {user && currentRoute && (
             <BottomMenu currentRoute={currentRoute} changeRoute={navRef.navigate} />
           )}
         </>

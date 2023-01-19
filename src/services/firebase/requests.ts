@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 // TODO: Replace type to generic
 import { User } from '@/types/models';
@@ -30,16 +30,14 @@ export const register = async (user: Omit<User, '_id'>): Promise<User | never> =
   try {
     const userDoc = await createUserWithEmailAndPassword(auth, user.email, user.password);
 
-    const newUser = {
-      ...user,
-      _id: userDoc.user.uid,
-    } as User;
+    const newUser = { ...user, _id: userDoc.user.uid } as User;
 
     if (user.avatar) {
       newUser.avatar = await saveImageToStorage(user.avatar);
     }
 
-    await addDoc(collection(db, 'users'), newUser);
+    const userRef = collection(db, 'users');
+    await setDoc(doc(userRef, user.email), newUser);
 
     return newUser;
   } catch (error: any) {
@@ -47,15 +45,23 @@ export const register = async (user: Omit<User, '_id'>): Promise<User | never> =
   }
 };
 
-export const login = async (email: string, password: string) => {
+export const login = async (email: string, password: string): Promise<User | null> => {
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
 
-    console.log('USER ', user);
+    const userRef = doc(db, 'users', email);
+    const docSnap = await getDoc(userRef);
 
-    return null;
+    return docSnap ? (docSnap.data() as User) : null;
   } catch (error: any) {
     throw Error(error.message);
   }
 };
-export const logout = () => {};
+
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (error: any) {
+    throw Error(error.message);
+  }
+};

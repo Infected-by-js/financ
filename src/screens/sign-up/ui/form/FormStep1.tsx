@@ -2,9 +2,8 @@ import React, { FC } from 'react';
 import { Button, Icon, Text, View, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { InputPassword, InputText } from '@/shared/components/molecules';
 import { User } from '@/types/models';
-import InputFieldPassword from '@/components/molecules/InputPassword';
-import InputFieldText from '@/components/molecules/InputText';
 
 interface Props {
   submitStep: (field: Partial<User>) => void;
@@ -44,7 +43,7 @@ const FormStep1: FC<Props> = ({ submitStep }) => {
           required: 'Поле обязательно',
         }}
         render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
-          <InputFieldText
+          <InputText
             value={value}
             onChange={onChange}
             onBlur={onBlur}
@@ -68,7 +67,7 @@ const FormStep1: FC<Props> = ({ submitStep }) => {
           required: 'Поле обязательно',
         }}
         render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
-          <InputFieldPassword
+          <InputPassword
             value={value}
             onChange={onChange}
             onBlur={onBlur}

@@ -1,13 +1,15 @@
 import { FC, ReactNode, createContext, useEffect, useMemo, useState } from 'react';
 import { Alert } from 'react-native';
-import { User } from '@/types/models';
 import { FirebaseService, StorageService } from '@/services';
+import { User } from '@/types/models';
 
 interface Context {
   user: User | null;
   isLoading: boolean;
   isInitLoading: boolean;
   register: (user: Omit<User, '_id'>) => void;
+  login: (email: string, password: string) => void;
+  logout: () => void;
 }
 
 interface Props {
@@ -38,6 +40,43 @@ const UserProvider: FC<Props> = ({ children }) => {
     }
   };
 
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      setIsLoading(true);
+
+      const savedUser = await FirebaseService.login(email, password);
+
+      StorageService.setItem('user', savedUser);
+      setUser(savedUser);
+    } catch (error: any) {
+      if (error.message.includes('user-not-found')) {
+        Alert.alert('Пользователь не найден');
+      } else {
+        Alert.alert('Ошибка при логине, попробуй позже');
+      }
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      setIsLoading(true);
+
+      await FirebaseService.logout();
+      await StorageService.removeItem('user');
+
+      setUser(null);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Ошибка выхода, попробуй позже');
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     StorageService.getItem<User>('user').then((savedUser) => {
       setUser(savedUser);
@@ -45,20 +84,14 @@ const UserProvider: FC<Props> = ({ children }) => {
     });
   }, []);
 
-  const handleLogin = () => {};
-
-  const handleLogout = () => {
-    StorageService.removeItem('user');
-  };
-
-  handleLogout();
-
   const value = useMemo(
     () => ({
       user,
       isLoading,
       isInitLoading,
       register: handleRegister,
+      login: handleLogin,
+      logout: handleLogout,
     }),
     [user, isLoading, isInitLoading]
   );

@@ -1,7 +1,7 @@
 import React, { FC, memo, useState } from 'react';
 import { Icon, Input, Pressable, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import { InputField, InputFieldProps } from '@/components/atoms';
+import { InputField, InputFieldProps } from '@/shared/components/atoms';
 
 interface Props extends InputFieldProps {
   value: any;

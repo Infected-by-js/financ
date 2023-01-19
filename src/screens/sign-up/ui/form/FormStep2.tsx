@@ -13,8 +13,8 @@ import {
 } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { InputText } from '@/shared/components/molecules';
 import { User } from '@/types/models';
-import InputFieldText from '@/components/molecules/InputText';
 
 interface Props {
   initName: string;
@@ -79,7 +79,7 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
         </Center>
       </TouchableOpacity>
 
-      <InputFieldText
+      <InputText
         value={name}
         onChange={setName}
         label="Как к тебе обращаться?"

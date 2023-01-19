@@ -27,7 +27,8 @@ const BottomMenu: FC<Props> = ({ currentRoute, changeRoute }) => {
     <HStack
       safeAreaBottom
       shadow={2}
-      p={4}
+      px={4}
+      pt={2}
       justifyContent="space-around"
       alignItems="center"
       bg={useColorModeValue('coolGray.100', 'coolGray.800')}

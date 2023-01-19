@@ -3,6 +3,7 @@ export interface RootStackParamList {
   Splash: undefined;
 
   //* protected
+  EntranceWithCode: undefined;
   Entrance: undefined;
   Home: undefined;
   History: undefined;
@@ -12,7 +13,6 @@ export interface RootStackParamList {
   //* public
   SignUp: undefined;
   Login: undefined;
-  LoginWithCode: undefined;
 }
 
 declare global {

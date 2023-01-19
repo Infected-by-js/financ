@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 import { Input, useColorModeValue } from 'native-base';
-import { InputField, InputFieldProps } from '@/components/atoms';
+import { InputField, InputFieldProps } from '@/shared/components/atoms';
 
 interface Props extends InputFieldProps {
   value: any;

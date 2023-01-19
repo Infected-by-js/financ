@@ -2,10 +2,10 @@ import { FC, useState } from 'react';
 import { HStack, Icon, Pressable, Text, VStack, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { Numpad, useNumpad } from '@/shared/components/organisms/numpad';
 import { logger } from '@/shared/utils';
 import { Operation as IOperation, OperationType } from '@/types/models';
-import { Numpad, useNumpad } from '@/components/organisms/numpad';
-import { useAuth } from '../../../hooks/useUserContext';
+import { useUserContext } from '../../hooks/useUserContext';
 import AmountDisplay from './AmountDisplay';
 import ButtonWithIcon from './ButtonWithIcon';
 import DatePicker from './DatePicker';
@@ -19,7 +19,7 @@ const Operation: FC = () => {
 
   const groups = []; // get from api
   const pouches = []; // same here
-  const { user } = useAuth();
+  const { user } = useUserContext();
   const selectedGroup = '1';
   const selectedPouch = '1';
 

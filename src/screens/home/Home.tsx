@@ -1,14 +1,14 @@
 import { FC, ReactNode, useEffect } from 'react';
 import { Box, HStack, ScrollView, Text, VStack, View, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
+import { StorageService } from '@/services';
+import { useUserContext } from '@/hooks';
+import OperationListItem from '@/shared/components/organisms/OperationListItem';
 import { toCurrency } from '@/shared/utils';
 import { Group, Operation } from '@/types/models';
-import OperationListItem from '@/components/organisms/OperationListItem';
-import { getPouchOperations, getUserGroups } from '@/fixtures/dummy';
-import { useUserContext } from '@/hooks';
-import { StorageService } from '@/services';
 import BalanceBanner from './BalanceBanner';
 import Header from './Header';
+import { getPouchOperations, getUserGroups } from '@/fixtures/dummy';
 
 interface Props {
   children?: ReactNode;

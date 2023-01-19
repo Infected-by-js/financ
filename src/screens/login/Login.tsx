@@ -1,29 +1,34 @@
+import { FC, ReactNode } from 'react';
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { HStack, Spinner, Text, ZStack, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { useUserContext } from '@/hooks';
-import { BtnThemeSwitch } from '@/components/molecules';
-import { ScreenLayout } from '@/components/atoms';
+import { ScreenLayout } from '@/shared/components/atoms';
+import { BtnThemeSwitch } from '@/shared/components/molecules';
 import { Form } from './ui';
 
-const SignUp = () => {
+interface Props {
+  children?: ReactNode;
+}
+
+const Login: FC<Props> = () => {
   const navigation = useNavigation();
-  const { register, isLoading } = useUserContext();
+  const { isLoading, login } = useUserContext();
 
   return (
     <ZStack>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <ScreenLayout safeArea justifyContent="center">
-          <Form onSubmit={register} />
+          <Form onSubmit={login} />
 
           <HStack justifyContent="center" mt={6}>
             <Text textAlign="center" mr={2} color="coolGray.400">
-              Уже есть аккаунт?
+              Нет аккаунта?
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
               <Text textAlign="center" color={useColorModeValue('coolGray.900', 'coolGray.200')}>
-                Войти
+                Зарегистрироваться
               </Text>
             </TouchableOpacity>
           </HStack>
@@ -41,4 +46,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

@@ -26,13 +26,8 @@ module.exports = {
     '^@/components/organisms(.*)$',
     '^@/components/molecules(.*)$',
     '^@/components/atoms(.*)$',
-
-    '^@/(.*)$',
     '^../(.*)$',
     '^./(.*)$',
-
-    // '^../(.*)$',
-    // '^./(.*)$',
   ],
   importOrderSortSpecifiers: true,
 };
