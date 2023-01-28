@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { Box, Button, Icon, Text, useColorModeValue } from 'native-base';
+import { Box, Button, Icon, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUserContext } from '@/hooks';
@@ -43,7 +43,7 @@ const EntranceWithCode: FC = () => {
   }, [code]);
 
   return (
-    <ScreenLayout safeArea bg={useColorModeValue('coolGray.100', 'coolGray.800')}>
+    <ScreenLayout safeArea>
       <Box mt={20} alignItems="center">
         <UserAvatar avatar={user?.avatar} />
 

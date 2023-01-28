@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
-import { Text } from 'react-native';
-import { VStack, useColorModeValue } from 'native-base';
+import { Box, Center, Spinner, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { useUserContext } from '@/hooks';
-import { logger } from '@/shared/utils';
+import { ScreenLayout } from '@/shared/components/atoms';
+import UserAvatar from '../entrance-with-code/ui/UserAvatar';
 
 const Entrance: FC = () => {
   const { user } = useUserContext();
@@ -13,21 +13,22 @@ const Entrance: FC = () => {
     // TODO: GET user operations
     setTimeout(() => {
       navigation.navigate('Home');
-    }, 1000);
+    }, 2000);
   }, []);
 
   return (
-    <VStack
-      safeAreaTop
-      w="full"
-      h="full"
-      pt={4}
-      px={4}
-      bg={useColorModeValue('coolGray.100', 'coolGray.800')}
-    >
-      <Text>Добро пожаловать!</Text>
-      <Text>{user?.name}</Text>
-    </VStack>
+    <ScreenLayout safeArea>
+      <Box mt={20} alignItems="center">
+        <UserAvatar avatar={user?.avatar} />
+
+        <Text fontSize="xl" fontWeight="bold">
+          Добро пожаловать, {user?.name}!
+        </Text>
+      </Box>
+      <Center flex={1}>
+        <Spinner size="lg" />
+      </Center>
+    </ScreenLayout>
   );
 };
 
