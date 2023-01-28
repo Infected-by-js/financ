@@ -7,4 +7,5 @@ export interface KeyType {
 
 export interface NumPadProps {
   onItemClick: (key: KeyType) => void;
+  hideSeparator?: boolean;
 }

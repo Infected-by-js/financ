@@ -1,3 +1,3 @@
 export * from './hooks';
-export * from './types';
+export { KeyType } from './types';
 export { default as Numpad } from './ui';

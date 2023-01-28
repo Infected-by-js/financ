@@ -4,10 +4,25 @@ import { Icon, Text } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { ActionType, NumPadProps } from './types';
 
-const Numpad = ({ onItemClick }: NumPadProps) => {
-  const numberRange = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'X'];
+const Numpad = ({ onItemClick, hideSeparator }: NumPadProps) => {
+  const numberRange = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    hideSeparator ? '' : '.',
+    '0',
+    'X',
+  ];
 
   const onButtonPress = (item: string) => {
+    if (!item) return;
+
     const TYPES: { [key: string]: ActionType } = {
       X: 'delete',
       '.': 'separate',
