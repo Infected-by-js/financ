@@ -1,8 +1,8 @@
 import { FC, useMemo, useState } from 'react';
 import { Button, HStack, Icon, Switch, Text, View, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import { InputOTP } from '@/shared/components/molecules';
 import { User } from '@/types/models';
+import InputOTP from '../InputOTP';
 
 interface Props {
   submitStep: (field: Partial<User>) => void;

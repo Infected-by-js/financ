@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUserContext } from '@/hooks';
 import { ScreenLayout } from '@/shared/components/atoms';
-import { InputOTPOpenned } from '@/shared/components/molecules';
 import { KeyType, Numpad } from '@/shared/components/organisms/numpad';
+import InputCode from './ui/InputCode';
 import UserAvatar from './ui/UserAvatar';
 
 const CODE_LENGTH = 4;
@@ -32,6 +32,7 @@ const EntranceWithCode: FC = () => {
       const password = code.join('');
 
       if (password === user?.passwordShort) {
+        // TODO: GET user operations
         navigator.navigate('Home');
         return;
       }
@@ -63,7 +64,7 @@ const EntranceWithCode: FC = () => {
         Восстановить пароль?
       </Button>
 
-      <InputOTPOpenned password={code} passwordLength={CODE_LENGTH} />
+      <InputCode code={code} codeLength={CODE_LENGTH} />
 
       <Numpad onItemClick={enterCode} hideSeparator />
     </ScreenLayout>

@@ -2,17 +2,17 @@ import { FC } from 'react';
 import { Center, HStack, Text, useColorModeValue } from 'native-base';
 
 interface Props {
-  password: string | string[];
-  passwordLength: number;
+  code: string | string[];
+  codeLength: number;
 }
-const InputOTPOpenned: FC<Props> = ({ password, passwordLength }) => {
-  const boxArray = new Array(passwordLength).fill(null);
+const InputCode: FC<Props> = ({ code, codeLength }) => {
+  const boxArray = new Array(codeLength).fill(null);
 
   const InputBox = (_: string, index: number) => {
     const emptyInput = '';
-    const digit = password[index] || emptyInput;
+    const digit = code[index] || emptyInput;
 
-    const isCurrentValue = index === password.length;
+    const isCurrentValue = index === code.length;
 
     return (
       <Center
@@ -40,4 +40,4 @@ const InputOTPOpenned: FC<Props> = ({ password, passwordLength }) => {
   );
 };
 
-export default InputOTPOpenned;
+export default InputCode;

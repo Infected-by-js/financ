@@ -1,22 +1,20 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Text } from 'react-native';
 import { VStack, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { useUserContext } from '@/hooks';
+import { logger } from '@/shared/utils';
 
-interface Props {
-  children?: ReactNode;
-}
-
-const Entrance: FC<Props> = () => {
+const Entrance: FC = () => {
   const { user } = useUserContext();
   const navigation = useNavigation();
-  // get all data
-  // redirect to home page
 
   useEffect(() => {
-    navigation.navigate('Home');
-  }, [user]);
+    // TODO: GET user operations
+    setTimeout(() => {
+      navigation.navigate('Home');
+    }, 1000);
+  }, []);
 
   return (
     <VStack

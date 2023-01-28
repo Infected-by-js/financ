@@ -1,7 +1,6 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactNode } from 'react';
 import { Box, HStack, ScrollView, Text, VStack, View, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import { StorageService } from '@/services';
 import { useUserContext } from '@/hooks';
 import OperationListItem from '@/shared/components/organisms/OperationListItem';
 import { toCurrency } from '@/shared/utils';
@@ -40,10 +39,6 @@ const Home: FC<Props> = () => {
     const group = getGroupByOperationId(groups, id);
     return group ? group.icon : ' ';
   };
-
-  useEffect(() => {
-    StorageService.getItem('user').then((data) => console.log(data));
-  }, []);
 
   return (
     <VStack

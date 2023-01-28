@@ -49,6 +49,8 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
     }
   };
 
+  const onSubmit = () => submitStep({ avatar, name });
+
   return (
     <View>
       <Text fontSize="sm" color="coolGray.400" mb={6}>
@@ -104,7 +106,7 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
         </Button>
 
         <Button
-          onPress={() => submitStep({ avatar, name })}
+          onPress={onSubmit}
           bg={useColorModeValue('coolGray.800', 'coolGray.300')}
           _pressed={{ bg: 'coolGray.500' }}
           flex={1}

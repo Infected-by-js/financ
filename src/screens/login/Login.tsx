@@ -15,11 +15,16 @@ const Login: FC<Props> = () => {
   const navigation = useNavigation();
   const { isLoading, login } = useUserContext();
 
+  const submitForm = (email: string, password: string) => {
+    Keyboard.dismiss();
+    login(email, password);
+  };
+
   return (
     <ZStack>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <ScreenLayout safeArea justifyContent="center">
-          <Form onSubmit={login} />
+          <Form onSubmit={submitForm} />
 
           <HStack justifyContent="center" mt={6}>
             <Text textAlign="center" mr={2} color="coolGray.400">

@@ -3,13 +3,12 @@ import { Button, Icon, Text, View, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { InputPassword, InputText } from '@/shared/components/molecules';
+import { EMAIL_REGEXP } from '@/shared/constants/string';
 import { User } from '@/types/models';
 
 interface Props {
   submitStep: (field: Partial<User>) => void;
 }
-
-const EMAIL_REGEXP = /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/;
 
 type FormData = { email: string; password: string };
 

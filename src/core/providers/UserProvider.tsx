@@ -32,7 +32,6 @@ const UserProvider: FC<Props> = ({ children }) => {
       StorageService.setItem('user', savedUser);
       setUser(savedUser);
     } catch (error: any) {
-      console.log(error);
       Alert.alert('Ошибка при регистрации, попробуй позже');
       setUser(null);
     } finally {
@@ -66,10 +65,10 @@ const UserProvider: FC<Props> = ({ children }) => {
 
       await FirebaseService.logout();
       await StorageService.removeItem('user');
+      await StorageService.removeItem('theme');
 
       setUser(null);
     } catch (error) {
-      console.log(error);
       Alert.alert('Ошибка выхода, попробуй позже');
       setUser(null);
     } finally {
@@ -78,10 +77,16 @@ const UserProvider: FC<Props> = ({ children }) => {
   };
 
   useEffect(() => {
-    StorageService.getItem<User>('user').then((savedUser) => {
-      setUser(savedUser);
-      setIsInitLoading(false);
-    });
+    StorageService.getItem<User>('user')
+      .then((savedUser) => {
+        setUser(savedUser);
+      })
+      .catch(() => {
+        setUser(null);
+      })
+      .finally(() => {
+        setIsInitLoading(false);
+      });
   }, []);
 
   const value = useMemo(

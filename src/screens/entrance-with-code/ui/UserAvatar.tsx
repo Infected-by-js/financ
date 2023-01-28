@@ -21,7 +21,7 @@ const UserAvatar: FC<Props> = ({ avatar }) => {
       {avatar ? (
         <Avatar size={60} source={{ uri: avatar }} />
       ) : (
-        <Icon size={10} as={Ionicons} name="person-outline" />
+        <Icon size={10} as={Ionicons} name="person-outline" color="white" />
       )}
     </Box>
   );

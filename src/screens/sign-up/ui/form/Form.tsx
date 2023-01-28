@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Keyboard } from 'react-native';
 import { HStack, Text, View } from 'native-base';
 import { User } from '@/types/models';
 import { useFormSteps } from '../../model';
@@ -15,11 +16,13 @@ const Form: FC<Props> = ({ onSubmit }) => {
   const { step, toNextStep, toPrevStep } = useFormSteps();
 
   const handleNextStep = (fields: Partial<User>) => {
+    Keyboard.dismiss();
     setUser((prev) => ({ ...prev, ...fields }));
     toNextStep();
   };
 
   const handleSubmitForm = (fields: Partial<User>) => {
+    Keyboard.dismiss();
     onSubmit({ ...user, ...fields });
   };
 

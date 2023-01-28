@@ -11,11 +11,13 @@ const SignUp: FC = () => {
   const navigation = useNavigation();
   const { register, isLoading } = useUserContext();
 
+  const onSubmitForm = register;
+
   return (
     <ZStack>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <ScreenLayout safeArea justifyContent="center">
-          <Form onSubmit={register} />
+          <Form onSubmit={onSubmitForm} />
 
           <HStack justifyContent="center" mt={6}>
             <Text textAlign="center" mr={2} color="coolGray.400">

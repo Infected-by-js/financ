@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useUserContext } from '@/hooks';
@@ -10,15 +10,9 @@ const Stack = createNativeStackNavigator();
 
 const pagesWithBottomMenu = ['Home', 'History', 'Settings'];
 
-const Navigator = () => {
+const Navigator = memo(() => {
   const { user, isInitLoading } = useUserContext();
   const { navRef, currentRoute } = useBottomMenuNavigation();
-
-  const initialRoute = useMemo(() => {
-    if (!user) return 'Login';
-
-    return user?.passwordShort ? 'EntranceWithCode' : 'Entrance';
-  }, [user]);
 
   const isShowMenu = useMemo(() => {
     return user && currentRoute && pagesWithBottomMenu.includes(currentRoute);
@@ -31,15 +25,25 @@ const Navigator = () => {
         <Screens.SplashScreen />
       ) : (
         <>
-          <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={initialRoute}>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
             {user ? (
               <>
-                <Stack.Screen name="EntranceWithCode" component={Screens.EntranceWithCodeScreen} />
-                <Stack.Screen name="Entrance" component={Screens.EntranceScreen} />
+                {user.passwordShort ? (
+                  <Stack.Screen
+                    name="EntranceWithCode"
+                    component={Screens.EntranceWithCodeScreen}
+                  />
+                ) : (
+                  <Stack.Screen name="Entrance" component={Screens.EntranceScreen} />
+                )}
                 <Stack.Screen name="Home" component={Screens.HomeScreen} />
                 <Stack.Screen name="History" component={Screens.HistoryScreen} />
                 <Stack.Screen name="Settings" component={Screens.SettingsScreen} />
-                <Stack.Screen name="Operation" component={Screens.OperationScreen} />
+                <Stack.Screen
+                  name="Operation"
+                  component={Screens.OperationScreen}
+                  options={{ presentation: 'modal' }}
+                />
               </>
             ) : (
               <>
@@ -56,6 +60,6 @@ const Navigator = () => {
       )}
     </NavigationContainer>
   );
-};
+});
 
 export default Navigator;
