@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useUserContext } from '@/hooks';
@@ -8,15 +8,21 @@ import * as Screens from '@/screens';
 
 const Stack = createNativeStackNavigator();
 
+const pagesWithBottomMenu = ['Home', 'History', 'Settings'];
+
 const Navigator = () => {
   const { user, isInitLoading } = useUserContext();
   const { navRef, currentRoute } = useBottomMenuNavigation();
 
-  const getInitialRouteName = useCallback(() => {
+  const initialRoute = useMemo(() => {
     if (!user) return 'Login';
 
     return user?.passwordShort ? 'EntranceWithCode' : 'Entrance';
   }, [user]);
+
+  const isShowMenu = useMemo(() => {
+    return user && currentRoute && pagesWithBottomMenu.includes(currentRoute);
+  }, [user, currentRoute]);
 
   return (
     // TODO: Swipe to lazy load
@@ -25,10 +31,7 @@ const Navigator = () => {
         <Screens.SplashScreen />
       ) : (
         <>
-          <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName={getInitialRouteName()}
-          >
+          <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={initialRoute}>
             {user ? (
               <>
                 <Stack.Screen name="EntranceWithCode" component={Screens.EntranceWithCodeScreen} />
@@ -46,8 +49,8 @@ const Navigator = () => {
             )}
           </Stack.Navigator>
 
-          {user && currentRoute && (
-            <BottomMenu currentRoute={currentRoute} changeRoute={navRef.navigate} />
+          {isShowMenu && (
+            <BottomMenu currentRoute={currentRoute as string} changeRoute={navRef.navigate} />
           )}
         </>
       )}

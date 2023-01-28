@@ -1,5 +1,11 @@
 export default (...args: any[]): void => {
-  console.log('====================================');
-  console.log(JSON.stringify(args, null, 2));
-  console.log('====================================');
+  const toStr = (data: any) => JSON.stringify(data, null, 2);
+
+  console.log(
+    `
+      \n====================================
+      \n${args.map((v) => toStr(v)).join('\n')}
+      \n====================================
+    `
+  );
 };
