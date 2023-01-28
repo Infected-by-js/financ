@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { HStack, Switch, Text, useColorMode } from 'native-base';
 
-const BtnThemeSwitch = () => {
+const BtnThemeSwitch: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
