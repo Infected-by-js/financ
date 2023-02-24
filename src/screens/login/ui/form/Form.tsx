@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Button, HStack, Text, View, useColorModeValue } from 'native-base';
 import { Controller, useForm } from 'react-hook-form';
+import { useLocalization } from '@/hooks';
 import { InputPassword, InputText } from '@/shared/components/molecules';
 import { EMAIL_REGEXP } from '@/shared/constants/string';
 
@@ -13,6 +14,7 @@ type FormData = { email: string; password: string };
 
 const Form: FC<Props> = ({ onSubmit }) => {
   const { handleSubmit, control } = useForm<FormData>({ mode: 'onBlur' });
+  const { strings } = useLocalization();
 
   const submitForm = (data: FormData) => onSubmit(data.email, data.password);
 
@@ -20,17 +22,17 @@ const Form: FC<Props> = ({ onSubmit }) => {
     <View mx={10}>
       <HStack mb={6} alignItems="center" justifyContent="space-between">
         <Text fontSize="2xl" fontWeight="bold">
-          Логин
+          {strings.auth.Login}
         </Text>
       </HStack>
 
       <View>
         <Text fontSize="md" fontWeight="bold" mb={1}>
-          Привет 👋
+          {strings.Hello} 👋
         </Text>
 
         <Text fontSize="sm" color="coolGray.400" mb={4}>
-          Введи данные для входа 🚀
+          {strings.auth.EnterLoginDetails} 🚀
         </Text>
 
         <Controller
@@ -39,9 +41,9 @@ const Form: FC<Props> = ({ onSubmit }) => {
           rules={{
             pattern: {
               value: EMAIL_REGEXP,
-              message: 'Недопустимый Email',
+              message: strings.validation.InvalidEmail,
             },
-            required: 'Поле обязательно',
+            required: strings.validation.FieldRequired,
           }}
           render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
             <InputText
@@ -63,17 +65,17 @@ const Form: FC<Props> = ({ onSubmit }) => {
           rules={{
             minLength: {
               value: 6,
-              message: 'Пароль должен быть не менее 6 символов',
+              message: `${strings.validation.PassAtLeast} 6 ${strings.validation.symbols}`,
             },
-            required: 'Поле обязательно',
+            required: strings.validation.FieldRequired,
           }}
           render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
             <InputPassword
               value={value}
               onChange={onChange}
               onBlur={onBlur}
-              label="Пароль"
-              placeholder="не менее 6 символов"
+              label={strings.Password}
+              placeholder={strings.validation.EnterPass}
               errorMessage={error?.message}
               isInvalid={!!error?.message}
               mb={8}
@@ -87,7 +89,9 @@ const Form: FC<Props> = ({ onSubmit }) => {
           mb={4}
           _pressed={{ bg: 'coolGray.600' }}
         >
-          <Text color={useColorModeValue('coolGray.100', 'coolGray.900')}>Войти</Text>
+          <Text color={useColorModeValue('coolGray.100', 'coolGray.900')}>
+            {strings.auth.Enter}
+          </Text>
         </Button>
       </View>
     </View>

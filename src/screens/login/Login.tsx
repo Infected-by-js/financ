@@ -2,9 +2,9 @@ import { FC, ReactNode } from 'react';
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { HStack, Spinner, Text, ZStack, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import { useUserContext } from '@/hooks';
+import { useLocalization, useUserContext } from '@/hooks';
 import { ScreenLayout } from '@/shared/components/atoms';
-import { BtnThemeSwitch } from '@/shared/components/molecules';
+import { BtnLanguage, BtnThemeSwitch } from '@/shared/components/molecules';
 import { Form } from './ui';
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 const Login: FC<Props> = () => {
   const navigation = useNavigation();
   const { isLoading, login } = useUserContext();
+  const { strings } = useLocalization();
 
   const submitForm = (email: string, password: string) => {
     Keyboard.dismiss();
@@ -28,18 +29,19 @@ const Login: FC<Props> = () => {
 
           <HStack justifyContent="center" mt={6}>
             <Text textAlign="center" mr={2} color="coolGray.400">
-              Нет аккаунта?
+              {strings.auth.NoAccount}
             </Text>
 
             <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
               <Text textAlign="center" color={useColorModeValue('coolGray.900', 'coolGray.200')}>
-                Зарегистрироваться
+                {strings.auth.Register}
               </Text>
             </TouchableOpacity>
           </HStack>
 
-          <HStack justifyContent="center" mt={6}>
+          <HStack justifyContent="center" mt={6} mx={10} space="xl">
             <BtnThemeSwitch />
+            <BtnLanguage />
           </HStack>
         </ScreenLayout>
       </TouchableWithoutFeedback>

@@ -1,4 +1,4 @@
-import { Group, Operation, Pouch, User } from '../types/models';
+import { Group, Pouch, User } from '../types/models';
 
 const user: User = {
   _id: 'f7ace532-582a-4edf-88ff-621430d9de33',
@@ -58,17 +58,7 @@ const pouches: Pouch[] = [
   },
 ];
 
-const operations: Operation[] = [
-  {
-    _id: '1',
-    pouchId: '1',
-    groupId: '3',
-    userId: user._id,
-    type: 'deposit',
-    description: null,
-    amount: 10000,
-    date: '2022-12-30T13:53:44.639Z',
-  },
+const operations = [
   {
     _id: '2',
     pouchId: '1',
@@ -91,7 +81,68 @@ const operations: Operation[] = [
   },
 ];
 
+const expectedResponse = [
+  {
+    date: '2022-12-31',
+    amount: 1500,
+    operations: [
+      {
+        _id: '2',
+        pouchId: '1',
+        groupId: '1',
+        userId: user._id,
+        amount: 1000,
+        date: '2022-12-31T13:53:44.639Z',
+        type: 'withdraw',
+        description: 'Оставшиеся подарки к новому году',
+      },
+      {
+        _id: '3',
+        pouchId: '1',
+        groupId: '2',
+        userId: user._id,
+        amount: 500,
+        date: '2022-12-31T13:13:44.639Z',
+        type: 'withdraw',
+        description: 'Энергетики',
+      },
+    ],
+  },
+];
+
 export const getUser = () => user;
 export const getUserPouches = () => pouches;
 export const getUserGroups = () => groups;
 export const getPouchOperations = () => operations;
+
+// const groupOperationsByDate = (operations) => {
+//   const groupedOperations = operations.reduce((acc, operation) => {
+//     const date = new Date(operation.date).toLocaleDateString();
+
+//     if (!acc[date]) {
+//       acc[date] = {
+//         date,
+//         amount: 0,
+//         operations: [],
+//         _id: `${date}-${Math.random().toString(36).slice(2, 15)}`,
+//       };
+//     }
+
+//     acc[date].amount += operation.amount;
+//     acc[date].operations.push(operation);
+//     return acc;
+//   }, {});
+
+//   return Object.values(groupedOperations);
+// };
+
+// const filterOperationsByPeriod = (operations, from, to) => {
+//   return groupOperationsByDate(operations).filter((operationByDay) => {
+//     const operationDay = new Date(operationByDay.date);
+//     return operationDay >= from && operationDay <= to;
+//   });
+// };
+
+// export const getOperationsByPeriod = ({ from, to }) => {
+//   return filterOperationsByPeriod(operations, from, to);
+// };

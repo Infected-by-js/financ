@@ -46,16 +46,12 @@ export const register = async (user: Omit<User, '_id'>): Promise<User | never> =
 };
 
 export const login = async (email: string, password: string): Promise<User | null> => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
+  await signInWithEmailAndPassword(auth, email, password);
 
-    const userRef = doc(db, 'users', email);
-    const docSnap = await getDoc(userRef);
+  const userRef = doc(db, 'users', email);
+  const docSnap = await getDoc(userRef);
 
-    return docSnap ? (docSnap.data() as User) : null;
-  } catch (error: any) {
-    throw Error(error.message);
-  }
+  return docSnap ? (docSnap.data() as User) : null;
 };
 
 export const logout = async () => {
@@ -65,3 +61,5 @@ export const logout = async () => {
     throw Error(error.message);
   }
 };
+
+// infetedbyjs@gmail.com

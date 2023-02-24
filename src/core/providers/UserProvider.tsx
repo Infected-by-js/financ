@@ -1,6 +1,7 @@
 import { FC, ReactNode, createContext, useEffect, useMemo, useState } from 'react';
 import { Alert } from 'react-native';
 import { FirebaseService, StorageService } from '@/services';
+import { useLocalization } from '@/hooks/useLocalization';
 import { User } from '@/types/models';
 
 interface Context {
@@ -22,6 +23,7 @@ const UserProvider: FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(true);
+  const { errors } = useLocalization();
 
   const handleRegister = async (user: Omit<User, '_id'>) => {
     try {
@@ -32,7 +34,11 @@ const UserProvider: FC<Props> = ({ children }) => {
       StorageService.setItem('user', savedUser);
       setUser(savedUser);
     } catch (error: any) {
-      Alert.alert('Ошибка при регистрации, попробуй позже');
+      const msg = (errors as any)[error.code];
+
+      if (msg) Alert.alert(msg);
+      else Alert.alert(errors.NonExpected);
+
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -48,11 +54,11 @@ const UserProvider: FC<Props> = ({ children }) => {
       StorageService.setItem('user', savedUser);
       setUser(savedUser);
     } catch (error: any) {
-      if (error.message.includes('user-not-found')) {
-        Alert.alert('Пользователь не найден');
-      } else {
-        Alert.alert('Ошибка при логине, попробуй позже');
-      }
+      const msg = (errors as any)[error.code];
+
+      if (msg) Alert.alert(msg);
+      else Alert.alert(errors.NonExpected);
+
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -68,8 +74,12 @@ const UserProvider: FC<Props> = ({ children }) => {
       await StorageService.removeItem('theme');
 
       setUser(null);
-    } catch (error) {
-      Alert.alert('Ошибка выхода, попробуй позже');
+    } catch (error: any) {
+      const msg = (errors as any)[error.code];
+
+      if (msg) Alert.alert(msg);
+      else Alert.alert(errors.NonExpected);
+
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -98,7 +108,7 @@ const UserProvider: FC<Props> = ({ children }) => {
       login: handleLogin,
       logout: handleLogout,
     }),
-    [user, isLoading, isInitLoading]
+    [user, isLoading, isInitLoading, handleLogin, handleRegister, handleLogout]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

@@ -1,0 +1,12 @@
+{
+  "auth/email-already-exists": ["Email already exists", "Email уже существует"],
+  "auth/invalid-email": ["Invalid email", "Неверный email"],
+  "auth/invalid-password": ["Invalid password", "Неверный пароль"],
+  "auth/user-not-found": ["User not found", "Пользователь не найден"],
+  "NonExpected": ["Something went wrong", "Что-то пошло не так"],
+  "nest": {
+    "nestNest": {
+      "nestNestKey": ["ad", "asd"]
+    }
+  }
+}

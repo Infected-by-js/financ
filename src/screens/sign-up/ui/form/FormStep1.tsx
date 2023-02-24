@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Button, Icon, Text, View, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useLocalization } from '@/hooks';
 import { InputPassword, InputText } from '@/shared/components/molecules';
 import { EMAIL_REGEXP } from '@/shared/constants/string';
 import { User } from '@/types/models';
@@ -14,21 +15,22 @@ type FormData = { email: string; password: string };
 
 const FormStep1: FC<Props> = ({ submitStep }) => {
   const { handleSubmit, control } = useForm<FormData>({ mode: 'onBlur' });
+  const { strings } = useLocalization();
 
   const onSubmit: SubmitHandler<FormData> = submitStep;
 
   return (
     <View>
       <Text fontSize="md" fontWeight="bold" mb={1}>
-        Привет 👋
+        {strings.Hello} 👋
       </Text>
 
       <Text fontSize="sm" color="coolGray.400">
-        Для регистрации пройди несколько шагов,
+        {strings.auth.RegisterPreparation}
       </Text>
 
       <Text fontSize="sm" color="coolGray.400" mb={4}>
-        Это займет пару минут ✌️
+        {strings.auth.FewMinutes} ✌️
       </Text>
 
       <Controller
@@ -37,9 +39,9 @@ const FormStep1: FC<Props> = ({ submitStep }) => {
         rules={{
           pattern: {
             value: EMAIL_REGEXP,
-            message: 'Недопустимый Email',
+            message: strings.validation.InvalidEmail,
           },
-          required: 'Поле обязательно',
+          required: strings.validation.FieldRequired,
         }}
         render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
           <InputText

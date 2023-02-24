@@ -29,3 +29,7 @@
 ## Main screen
 
 https://www.figma.com/file/T6KaRhacj9oi9aTbUCc4J2/Wallet-and-expense-tracker-app-(Community)?node-id=205%3A620&t=NaJA2Jswb2BOVX8R-0
+
+## Created an interface generator
+
+- TODO: Добавить поясенение как с ним работать

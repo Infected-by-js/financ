@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { HStack, Text, View } from 'native-base';
+import { useLocalization } from '@/hooks';
 import { User } from '@/types/models';
 import { useFormSteps } from '../../model';
 import Step1 from './FormStep1';
@@ -14,6 +15,7 @@ interface Props {
 const Form: FC<Props> = ({ onSubmit }) => {
   const [user, setUser] = useState<User>({} as User);
   const { step, toNextStep, toPrevStep } = useFormSteps();
+  const { strings } = useLocalization();
 
   const handleNextStep = (fields: Partial<User>) => {
     Keyboard.dismiss();
@@ -30,10 +32,10 @@ const Form: FC<Props> = ({ onSubmit }) => {
     <View mx={10}>
       <HStack mb={6} alignItems="center" justifyContent="space-between">
         <Text fontSize="2xl" fontWeight="bold">
-          Регистрация
+          {strings.Register}
         </Text>
         <Text fontSize="sm" fontWeight="bold">
-          Шаг {step} / 3
+          {strings.Step} {step} / 3
         </Text>
       </HStack>
 

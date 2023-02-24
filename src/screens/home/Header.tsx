@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, HStack, Icon, IconButton, Text, useColorModeValue } from 'native-base';
+import { Avatar, HStack, Icon, IconButton, Text, useColorModeValue } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { User } from '@/types/models';
 
@@ -11,12 +11,14 @@ interface Props {
 const Header: FC<Props> = ({ user, onPress }) => {
   return (
     <HStack alignItems="center" justifyContent="space-between" w="full" mb={3}>
-      <Box>
-        <Text fontSize="md">Привет, </Text>
-        <Text fontSize="md" fontWeight="bold">
-          {user?.name}
-        </Text>
-      </Box>
+      <HStack alignItems="center">
+        {user?.avatar ? (
+          <Avatar source={{ uri: user?.avatar }} size="md" />
+        ) : (
+          <Text fontSize="3xl">🥰</Text>
+        )}
+      </HStack>
+
       <IconButton
         onPress={onPress}
         icon={

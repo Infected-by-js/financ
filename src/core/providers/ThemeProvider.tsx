@@ -12,7 +12,7 @@ const ThemeProvider: FC<Props> = ({ children }) => {
     get: async () => {
       try {
         const theme = await StorageService.getItem<ColorMode>('theme');
-        return theme === 'dark' ? 'dark' : 'light';
+        return theme === 'dark' ? 'dark' : 'light'; // for typescript
       } catch {
         return 'light';
       }

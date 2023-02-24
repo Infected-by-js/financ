@@ -1,15 +1,20 @@
 import { FC } from 'react';
-import { HStack, Switch, Text, useColorMode } from 'native-base';
+import { TouchableOpacity } from 'react-native';
+import { Icon, useColorMode } from 'native-base';
+import { Ionicons } from '@expo/vector-icons';
 
 const BtnThemeSwitch: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <HStack space={2} alignItems="center">
-      <Text>Light</Text>
-      <Switch isChecked={colorMode === 'dark'} onToggle={toggleColorMode} />
-      <Text>Dark</Text>
-    </HStack>
+    <TouchableOpacity onPress={toggleColorMode}>
+      <Icon
+        as={Ionicons}
+        name={colorMode === 'dark' ? 'moon' : 'sunny'}
+        size="xl"
+        color={colorMode === 'dark' ? 'blue.500' : 'amber.500'}
+      />
+    </TouchableOpacity>
   );
 };
 
