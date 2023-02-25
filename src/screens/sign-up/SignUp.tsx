@@ -1,33 +1,44 @@
 import { FC } from 'react';
-import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Alert, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { HStack, Spinner, Text, ZStack, useColorModeValue } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import { useLocalization, useUserContext } from '@/hooks';
+import { useI18n, useUserContext } from '@/hooks';
 import { ScreenLayout } from '@/shared/components/atoms';
 import { BtnLanguage, BtnThemeSwitch } from '@/shared/components/molecules';
+import { User } from '@/types/models';
 import { Form } from './ui';
 
 const SignUp: FC = () => {
   const navigation = useNavigation();
   const { register, isLoading } = useUserContext();
-  const { strings } = useLocalization();
+  const { i18n } = useI18n();
 
-  const onSubmitForm = register;
+  const submitForm = (user: Omit<User, '_id'>) => {
+    Keyboard.dismiss();
+
+    register(user).catch((error) => {
+      console.log(error);
+      const msg = (i18n.errors as any)[error.code];
+
+      if (msg) Alert.alert(msg);
+      else Alert.alert(i18n.errors.NonExpected);
+    });
+  };
 
   return (
     <ZStack>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <ScreenLayout safeArea justifyContent="center">
-          <Form onSubmit={onSubmitForm} />
+          <Form onSubmit={submitForm} />
 
           <HStack justifyContent="center" mt={6}>
             <Text textAlign="center" mr={2} color="coolGray.400">
-              {strings.auth.AlreadyHaveAccount}
+              {i18n.auth.AlreadyHaveAccount}
             </Text>
 
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
               <Text textAlign="center" color={useColorModeValue('coolGray.900', 'coolGray.200')}>
-                {strings.Login}
+                {i18n.Login}
               </Text>
             </TouchableOpacity>
           </HStack>

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Button, Icon, Text, View, useColorModeValue } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useLocalization } from '@/hooks';
+import { useI18n } from '@/hooks';
 import { InputPassword, InputText } from '@/shared/components/molecules';
 import { EMAIL_REGEXP } from '@/shared/constants/string';
 import { User } from '@/types/models';
@@ -15,22 +15,22 @@ type FormData = { email: string; password: string };
 
 const FormStep1: FC<Props> = ({ submitStep }) => {
   const { handleSubmit, control } = useForm<FormData>({ mode: 'onBlur' });
-  const { strings } = useLocalization();
+  const { i18n } = useI18n();
 
   const onSubmit: SubmitHandler<FormData> = submitStep;
 
   return (
     <View>
       <Text fontSize="md" fontWeight="bold" mb={1}>
-        {strings.Hello} 👋
+        {i18n.Hello} 👋
       </Text>
 
       <Text fontSize="sm" color="coolGray.400">
-        {strings.auth.RegisterPreparation}
+        {i18n.auth.RegisterPreparation}
       </Text>
 
       <Text fontSize="sm" color="coolGray.400" mb={4}>
-        {strings.auth.FewMinutes} ✌️
+        {i18n.auth.FewMinutes} ✌️
       </Text>
 
       <Controller
@@ -39,16 +39,16 @@ const FormStep1: FC<Props> = ({ submitStep }) => {
         rules={{
           pattern: {
             value: EMAIL_REGEXP,
-            message: strings.validation.InvalidEmail,
+            message: i18n.validation.InvalidEmail,
           },
-          required: strings.validation.FieldRequired,
+          required: i18n.validation.FieldRequired,
         }}
         render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
           <InputText
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            label="Укажи email"
+            label={i18n.auth.EnterEmail}
             placeholder="email@example.com"
             errorMessage={error?.message}
             isInvalid={!!error?.message}
@@ -63,17 +63,17 @@ const FormStep1: FC<Props> = ({ submitStep }) => {
         rules={{
           minLength: {
             value: 6,
-            message: 'Пароль должен быть не менее 6 символов',
+            message: `${i18n.validation.PassAtLeast} 6 ${i18n.validation.symbols}`,
           },
-          required: 'Поле обязательно',
+          required: i18n.validation.FieldRequired,
         }}
         render={({ field: { onBlur, onChange, value }, fieldState: { error } }) => (
           <InputPassword
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            label="Придумай пароль"
-            placeholder="не менее 6 символов"
+            label={i18n.auth.EnterPassword}
+            placeholder={i18n.validation.EnterPass}
             errorMessage={error?.message}
             isInvalid={!!error?.message}
             mb={8}

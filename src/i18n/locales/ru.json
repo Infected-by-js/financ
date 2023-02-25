@@ -1,0 +1,80 @@
+{
+  "errors": {
+    "auth/email-already-exists": "Email уже существует",
+    "auth/email-already-in-use": "Email уже существует",
+    "auth/invalid-email": "Неверный email",
+    "auth/invalid-password": "Неверный пароль",
+    "auth/user-not-found": "Пользователь не найден",
+    "NonExpected": "Что-то пошло не так"
+  },
+
+  "Login": "Вход",
+  "Register": "Регистрация",
+  "AreYouSure": "Вы уверены?",
+  "Balance": "Баланс",
+  "Email": "Email",
+  "Deposit": "Депозит",
+  "Withdraw": "Вывести",
+  "Ok": "Ок",
+  "Cancel": "Отмена",
+  "Available": "Доступно",
+  "Limits": "Лимит",
+  "Own": "Собственный",
+  "Owner": "Владелец",
+  "Account": "Аккаунт",
+  "Logout": "Выход",
+  "Back": "Назад",
+  "Home": "Домой",
+  "Reset": "Сбросить",
+  "Amount": "Количество",
+  "Total": "Общий",
+  "Time": "Время",
+  "Status": "Статус",
+  "Description": "Описание",
+  "User": "Пользователь",
+  "Hello": "Привет",
+  "Password": "Пароль",
+  "Step": "Шаг",
+
+  "validation": {
+    "FieldRequired": "Поле обязательно",
+    "InvalidEmail": "Недопустимый Email",
+    "PassAtLeast": "Пароль должен быть не менее",
+    "EnterPass": "Введи пароль",
+    "symbols": "символов",
+    "AddPhotoError": "Ошибка добавления фото"
+  },
+
+  "theme": {
+    "Dark": "Темная",
+    "Light": "Светлая"
+  },
+
+  "auth": {
+    "Login": "Вход",
+    "EnterLoginDetails": "Введи данные для входа",
+    "Enter": "Войти",
+    "NoAccount": "Нет аккаунта?",
+    "Register": "Зарегистрироваться",
+    "AlreadyHaveAccount": "Уже есть аккаунт?",
+    "RegisterPreparation": "Для регистрации пройди несколько шагов",
+    "FewMinutes": "Это займет пару минут",
+    "EnterEmail": "Укажи email",
+    "EnterPassword": "Придумай пароль",
+    "YouCanSkipStep": "Этот шаг можно пропустить",
+    "YourNickname": "Как к тебе обращаться?",
+    "AddPhoto": "Добавь аватар",
+    "FinishingTouch": "Последний штрих",
+    "MorePasswordsForPasswordGod": "Больше паролей богу паролей",
+    "AddShortPassword": "Добавить короткий пароль при входе?",
+    "LetsBegin": "Cтартуем"
+  },
+
+  "lang": {
+    "short": "ru",
+    "long": "Русский",
+    "Lang": "Язык",
+    "SelectLang": "Выбери язык",
+    "CurrentLang": "Текущий язык"
+  }
+}

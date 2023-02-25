@@ -6,16 +6,18 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "generate-types": "sh generate-types.sh & sh generate-raw-types.sh"
+    "web": "expo start --web"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
     "@gorhom/bottom-sheet": "^4",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/drawer": "^6.5.6",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.7",
     "accounting": "^0.4.1",
+    "babel-loader": "^9.1.2",
     "dayjs": "^1.11.7",
     "expo": "~47.0.9",
     "expo-font": "~11.0.1",

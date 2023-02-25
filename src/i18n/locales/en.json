@@ -1,0 +1,80 @@
+{
+  "errors": {
+    "auth/email-already-exists": "Email already exists",
+    "auth/email-already-in-use": "Email already exists",
+    "auth/invalid-email": "Invalid email",
+    "auth/invalid-password": "Invalid password",
+    "auth/user-not-found": "User not found",
+    "NonExpected": "Something went wrong"
+  },
+
+  "Login": "Login",
+  "Register": "Register",
+  "AreYouSure": "Are you sure?",
+  "Balance": "Balance",
+  "Email": "Email",
+  "Deposit": "Deposit",
+  "Withdraw": "Withdraw",
+  "Ok": "Ok",
+  "Cancel": "Cancel",
+  "Available": "Available",
+  "Limits": "Limits",
+  "Own": "Own",
+  "Owner": "Owner",
+  "Account": "Account",
+  "Logout": "Logout",
+  "Back": "Back",
+  "Home": "Home",
+  "Reset": "Reset",
+  "Amount": "Amount",
+  "Total": "Total",
+  "Time": "Time",
+  "Status": "Status",
+  "Description": "Description",
+  "User": "User",
+  "Hello": "Hello",
+  "Password": "Password",
+  "Step": "Step",
+
+  "validation": {
+    "FieldRequired": "Field is required",
+    "InvalidEmail": "Invalid Email",
+    "PassAtLeast": "Password should be at least",
+    "EnterPass": "Enter password",
+    "symbols": "symbols",
+    "AddPhotoError": "Add photo error"
+  },
+
+  "theme": {
+    "Dark": "Dark",
+    "Light": "Light"
+  },
+
+  "auth": {
+    "Login": "Login",
+    "EnterLoginDetails": "Enter your login details",
+    "Enter": "Enter",
+    "NoAccount": "Don't have an account?",
+    "Register": "Register",
+    "AlreadyHaveAccount": "Already have an account?",
+    "RegisterPreparation": "Follow a few steps to register",
+    "FewMinutes": "It will take a few minutes",
+    "EnterEmail": "Enter email",
+    "EnterPassword": "Enter password",
+    "YouCanSkipStep": "You can skip this step",
+    "YourNickname": "How to address you?",
+    "AddPhoto": "Add your avatar",
+    "FinishingTouch": "Finishing touch",
+    "MorePasswordsForPasswordGod": "More passwords for the password god",
+    "AddShortPassword": "Add short password on login?",
+    "LetsBegin": "Let's begin"
+  },
+
+  "lang": {
+    "short": "en",
+    "long": "English",
+    "Lang": "Language",
+    "SelectLang": "Select language",
+    "CurrentLang": "Current language"
+  }
+}

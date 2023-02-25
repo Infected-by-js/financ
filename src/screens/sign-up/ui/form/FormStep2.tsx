@@ -13,6 +13,7 @@ import {
 } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { useI18n } from '@/hooks';
 import { InputText } from '@/shared/components/molecules';
 import { User } from '@/types/models';
 
@@ -27,6 +28,7 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
   const [avatar, setAvatar] = useState<string | null>(initAvatar || null);
   const [name, setName] = useState(initName || '');
   const [isAvatarPicking, setIsAvatarPicking] = useState(false);
+  const { i18n } = useI18n();
 
   const pickAvatar = async () => {
     try {
@@ -43,7 +45,7 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
         setAvatar(result.assets[0].uri);
       }
     } catch {
-      Alert.alert('Ошибка добавления фото');
+      Alert.alert(i18n.validation.AddPhotoError);
     } finally {
       setIsAvatarPicking(false);
     }
@@ -54,11 +56,11 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
   return (
     <View>
       <Text fontSize="sm" color="coolGray.400" mb={6}>
-        Этот шаг можно пропустить 😉
+        {i18n.auth.YouCanSkipStep} 😉
       </Text>
 
       <Text fontSize="sm" fontWeight="bold" mb={1} textAlign="center">
-        Добавь фотографию
+        {i18n.auth.AddPhoto}
       </Text>
 
       <TouchableOpacity onPress={pickAvatar}>
@@ -84,7 +86,7 @@ const FormStep2: FC<Props> = ({ submitStep, initName, initAvatar, backToPrevStep
       <InputText
         value={name}
         onChange={setName}
-        label="Как к тебе обращаться?"
+        label={i18n.auth.YourNickname}
         placeholder={initName}
         mb={4}
       />

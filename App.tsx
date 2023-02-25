@@ -1,7 +1,7 @@
 import { LogBox } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Navigator from '@/core/navigation/Navigator';
-import LocalizationProvider from '@/core/providers/LocalizationProvider';
+import I18nProvider from '@/core/providers/I18nProvider';
 import ThemeProvider from '@/core/providers/ThemeProvider';
 import AuthProvider from '@/core/providers/UserProvider';
 
@@ -12,13 +12,13 @@ LogBox.ignoreLogs([
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <LocalizationProvider>
+      <I18nProvider>
         <AuthProvider>
           <ThemeProvider>
             <Navigator />
           </ThemeProvider>
         </AuthProvider>
-      </LocalizationProvider>
+      </I18nProvider>
     </GestureHandlerRootView>
   );
 }
